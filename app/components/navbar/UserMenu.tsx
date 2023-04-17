@@ -19,7 +19,7 @@ function UserMenu() {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar />
+            <Avatar/>
           </div>
         </div>
       </div>

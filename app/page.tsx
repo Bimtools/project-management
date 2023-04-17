@@ -1,5 +1,9 @@
-export default function Home() {
+import Home from "./components/Home";
+
+function home() {
   return (
-    <div className="text-rose-500 text-2xl">Project Management</div>
-  )
+    <Home/>
+  );
 }
+
+export default home;
