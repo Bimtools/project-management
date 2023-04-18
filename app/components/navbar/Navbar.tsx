@@ -2,11 +2,13 @@ import UserMenu from "./UserMenu";
 
 function Navbar() {
   return (
-    <div className="w-full bg-transparent z-10">
-      <div className="flex flex-row items-center justify-between py-2 px-5">
-        <div className="md:text-2xl sx:text-xl border-collapse">
-          PROJECT MANAGEMENT
+    <div className="flex flex-row items-center py-2 px-5 border-[1px] shadow-md">
+      <div className="grow justify-center md:text-3xl sx:text-xl">
+        <div className="flex items-center justify-center">
+          <div>PROJECT MANAGEMENT</div>
         </div>
+      </div>
+      <div className="flex-none items-center">
         <UserMenu />
       </div>
     </div>

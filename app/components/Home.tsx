@@ -17,7 +17,7 @@ function Home() {
       <div className={show ? classNames.showSideBar : classNames.hideSideBar}>
         <Sidebar show={show} />
       </div>
-      <div className="flex flex-col items-center mt-[15px] text-tk-orange w-[15px] bg-white cursor-pointer">
+      <div className="flex flex-col items-center mt-[15px] text-tk-orange w-[1px] bg-white cursor-pointer">
         <div
           onClick={() => {
             SetShow(() => !show);

@@ -1,5 +1,8 @@
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import Sidebar from "./components/sidebar/SideBar";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
 
 export const metadata = {
   title: "Project Management",
@@ -9,10 +12,6 @@ export const metadata = {
 const font = Nunito({
   subsets: ["latin"],
 });
-const classNames = {
-  showSideBar: "flex-none z-30 w-[100px]",
-  hideSideBar: "flex-none z-30 w-[100px] hidden",
-};
 
 export default function RootLayout({
   children,
@@ -22,7 +21,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        {children}
+        <div className="h-screen flex flex-row justify-between">
+          <div className="flex-none">
+            <Sidebar />
+          </div>
+          <div className="grow">
+            <div className="h-screen w-full flex flex-col justify-between">
+              <div className="flex-none">
+                <Navbar />
+              </div>
+              <div className="grow h-full w-full">{children}</div>
+              <div className="flex-none">
+                <Footer />
+              </div>
+            </div>
+          </div>
+        </div>
       </body>
     </html>
   );

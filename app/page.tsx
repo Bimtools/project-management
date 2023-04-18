@@ -1,9 +1,12 @@
-import Home from "./components/Home";
+import Projects from './components/project/Projects';
 
-function home() {
+
+const page = () => {
   return (
-    <Home/>
-  );
+    <div>
+      <Projects/>
+    </div>
+  )
 }
 
-export default home;
+export default page
