@@ -1,12 +1,14 @@
-import Projects from './components/project/Projects';
-
+import Projects from "./components/project/Projects";
+import ClientOnly from "./components/ClientOnly";
 
 const page = () => {
   return (
     <div>
-      <Projects/>
+      <ClientOnly>
+        <Projects />
+      </ClientOnly>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
