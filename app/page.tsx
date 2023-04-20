@@ -1,11 +1,11 @@
-import Projects from "./components/project/Projects";
 import ClientOnly from "./components/ClientOnly";
+import Home from './components/Home';
 
 const page = () => {
   return (
     <div>
       <ClientOnly>
-        <Projects />
+        <Home/>
       </ClientOnly>
     </div>
   );

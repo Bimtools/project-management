@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 
 const Panel1 = ({ style }: { style: string }) => {
   return (
-    <div className="flex-none bg-tk-orange" id="tuan">
+    <div className="flex-none w-full bg-tk-orange" id="panel1">
       <div className="h-full w-full">a</div>
-      <style jsx>{`#tuan{height:${style}}`}</style>
+      <style jsx>{`#panel1{height:${style}}`}</style>
     </div>
   );
 };
