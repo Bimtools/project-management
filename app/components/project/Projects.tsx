@@ -3,41 +3,38 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
+const Panel1 = ({ style }: { style: string }) => {
+  return (
+    <div className="flex-none bg-tk-orange" id="tuan">
+      <div className="h-full w-full">a</div>
+      <style jsx>{`#tuan{height:${style}}`}</style>
+    </div>
+  );
+};
+
 const Projects = () => {
   const resizer = document.getElementById("resizer");
 
   const [leftRef, setLeftRef] = useState("flex-none h-[100px] bg-tk-orange");
   const [drag, setDrag] = useState(false);
-  const[clientX,setClientX]= useState(0);
+  const [clientX, setClientX] = useState(0);
 
   const onMouseDown = (e: MouseEvent) => {
-    //setDrag(true);
-    //e.preventDefault();
-    // if (drag) {
-    //   console.log(e.clientY);
-    //   setLeftRef(`flex-none h-[${e.clientY}px] bg-tk-orange`);
-    // }
+    setDrag(true);
   };
   const onTouchStart = () => {};
 
-  const onTouchMove = (e: React.TouchEvent) => {
+  const onTouchMove = (e: TouchEvent) => {
     e.preventDefault();
   };
   const onMouseMove = (e: MouseEvent) => {
-    //e.preventDefault();
-    // console.log(drag);
-    // if (drag) {
-    //   console.log(e.clientY);
-    //   setLeftRef(()=>`flex-none h-[200px] bg-tk-blue`);
-    // }
-    console.log(e.clientY);
-    setClientX(e.clientY)
-      setLeftRef(()=>`flex-none h-[200px] bg-tk-blue`);
-    //onMove(e.clientX);
+    e.preventDefault();
+    if (drag) {
+      setLeftRef(() => `${e.clientY}px`);
+    }
   };
 
   const onMouseUp = () => {
-    console.log(leftRef);
     setDrag(false);
   };
 
@@ -53,9 +50,7 @@ const Projects = () => {
   });
   return (
     <div className="flex flex-col h-full w-full items-center justify-start">
-      <div className={leftRef}>
-        <div className="h-full">{clientX}</div>
-      </div>
+      <Panel1 style={leftRef} />
 
       <div
         id="resizer"
