@@ -1,22 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
-import { PanelContainer, PanelContext } from "./splitpane/PanelContainer";
+import React from "react";
 
 function Home() {
-  const panelContextProps = React.useContext(PanelContext);
-
-  return (
-    <PanelContainer>
-      <PanelContext.Consumer>
-        {(context) => {
-          return{
-            
-          }
-        }}
-      </PanelContext.Consumer>
-    </PanelContainer>
-  );
+  //const{size}= useSplitContext();
+  return <div className="">400</div>;
 }
 
 export default Home;

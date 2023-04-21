@@ -1,14 +1,8 @@
-import ClientOnly from "./components/ClientOnly";
-import Home from './components/Home';
+
+import Home from "./components/Home";
 
 const page = () => {
-  return (
-    <div>
-      <ClientOnly>
-        <Home/>
-      </ClientOnly>
-    </div>
-  );
+  return <Home />;
 };
 
 export default page;

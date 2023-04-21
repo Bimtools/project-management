@@ -3,6 +3,7 @@ import "./globals.css";
 import Sidebar from "./components/sidebar/SideBar";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import { SplitContextProvider } from "./components/split/SplitContext";
 
 export const metadata = {
   title: "Project Management",
@@ -30,7 +31,9 @@ export default function RootLayout({
               <div className="flex-none">
                 <Navbar />
               </div>
-              <div className="grow h-full w-full">{children}</div>
+              <SplitContextProvider>
+                <div className="grow h-full w-full">{children}</div>
+              </SplitContextProvider>
               <div className="flex-none">
                 <Footer />
               </div>
