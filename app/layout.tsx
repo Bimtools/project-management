@@ -3,6 +3,7 @@ import "./globals.css";
 import Sidebar from "./components/sidebar/SideBar";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import ClientOnly from "./components/ClientOnly";
 
 export const metadata = {
   title: "Project Management",

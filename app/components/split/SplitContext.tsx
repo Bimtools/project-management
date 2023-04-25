@@ -1,15 +1,20 @@
 "use client";
 
 import React from "react";
+import ClientOnly from "../ClientOnly";
 
 interface SplitContextProps {
-  drag: boolean,
-  dragHandle: () => void,
-  size: number,
-  sizeHandle: (size: number) => void,
+  orientation: string;
+  orientationHandle: (value: string) => void;
+  drag: boolean;
+  dragHandle: () => void;
+  size: number;
+  sizeHandle: (size: number) => void;
 }
 
 const splitContextDefaultValues: SplitContextProps = {
+  orientation: "X",
+  orientationHandle: () => {},
   size: 400,
   sizeHandle: () => {},
   drag: false,
@@ -25,6 +30,8 @@ export function useSplitContext() {
 }
 
 export function SplitProvider({ children }: { children: React.ReactNode }) {
+
+  const [orientation, setOrientation] = React.useState("X");
   const [size, setSize] = React.useState(400);
   const [drag, setDrag] = React.useState(false);
   const sizeHandle = () => {
@@ -33,6 +40,9 @@ export function SplitProvider({ children }: { children: React.ReactNode }) {
 
   const dragHandle = () => {
     setDrag(() => !drag);
+  };
+  const orientationHandle = (orientation:string) => {
+    setOrientation(orientation);
   };
 
   const onTouchStart = () => {};
@@ -43,7 +53,13 @@ export function SplitProvider({ children }: { children: React.ReactNode }) {
   const onMouseMove = (e: MouseEvent) => {
     e.preventDefault();
     if (drag) {
-      setSize(e.clientY);
+      const panelSize =
+        orientation === "X" ? e.clientY  : e.clientX ;
+      const maxSize =
+        orientation === "X"
+          ? screen.height - 300
+          : screen.width  - 300;
+      setSize(panelSize > maxSize ? maxSize : panelSize);
     }
   };
 
@@ -51,8 +67,11 @@ export function SplitProvider({ children }: { children: React.ReactNode }) {
     setDrag(false);
   };
 
+
   const values: SplitContextProps = React.useMemo(() => {
     return {
+      orientation: orientation,
+      orientationHandle: orientationHandle,
       drag: drag,
       dragHandle: dragHandle,
       size: size,
@@ -73,7 +92,9 @@ export function SplitProvider({ children }: { children: React.ReactNode }) {
   return (
     <>
       <SplitContext.Provider value={values}>
-        <div className="flex flex-col h-full w-full items-center justify-start">
+        <div
+          className={orientation==='X'?"flex flex-col h-full w-full items-center justify-start":"flex flex-row h-full w-full items-center justify-start"}
+        >
           {children}
         </div>
       </SplitContext.Provider>
