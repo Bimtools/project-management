@@ -15,7 +15,7 @@ const Test = () => {
           }
         `}</style>
       </div>
-      <Divider orientation={"Y"}/>
+      <Divider orientation={"X"}/>
       <div className="grow">b</div>
     </>
   );

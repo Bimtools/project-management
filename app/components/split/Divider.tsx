@@ -7,6 +7,7 @@ const Divider = ({orientation}:{orientation:string}) => {
   useEffect(()=>{
     orientationHandle(orientation)
   })
+
   return (
     <>
       <div

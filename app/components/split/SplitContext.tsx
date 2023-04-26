@@ -31,6 +31,9 @@ export function useSplitContext() {
 
 export function SplitProvider({ children }: { children: React.ReactNode }) {
   const [orientation, setOrientation] = React.useState("X");
+  const [preSize, setPreSize] = React.useState(0);
+  const [panel2Size,setPanel2Size]= React.useState(0);
+  const [nextSize, setNextSize] = React.useState(0);
   const [size, setSize] = React.useState(400);
   const [drag, setDrag] = React.useState(false);
   const sizeHandle = () => {
@@ -49,22 +52,21 @@ export function SplitProvider({ children }: { children: React.ReactNode }) {
   const onTouchMove = (e: TouchEvent) => {
     e.preventDefault();
   };
-  const onMouseMove = (e: MouseEvent,preSize:number,nexSize:number) => {
+  const onMouseMove = (e: MouseEvent) => {
     e.preventDefault();
     if (drag) {
-      const panelSize = orientation === "X" ? e.clientY : e.clientX;
+      const panelSize =
+        orientation === "X" ? e.clientY - preSize : e.clientX - preSize;
       const maxSize =
-        orientation === "X" ? screen.height - 300 : screen.width - 300;
-      setSize(panelSize > maxSize ? maxSize : panelSize);
+        orientation === "X" ? screen.height - nextSize-panel2Size-10 : screen.width - nextSize-panel2Size-10;
+      console.log(e.clientY+"/"+maxSize)
+      setSize(e.clientY > maxSize ? maxSize : panelSize);
     }
   };
 
   const onMouseUp = () => {
     setDrag(false);
   };
-
-
-
 
   const values: SplitContextProps = React.useMemo(() => {
     return {
@@ -78,16 +80,36 @@ export function SplitProvider({ children }: { children: React.ReactNode }) {
   }, [size, drag]);
 
   React.useEffect(() => {
-    const splitElement = document.getElementById('splitView');
+    const splitElement = document.getElementById("splitView");
     const preElement = splitElement?.parentElement?.previousSibling;
-    const preChildElements = Object.values(preElement.childNodes) as HTMLElement[];
-    const preSize = orientation=='X'? preChildElements[0].offsetHeight:preChildElements[0].offsetWidth;
+    const preChildElements = Object.values(
+      preElement.childNodes
+    ) as HTMLElement[];
+    const preSize =
+      orientation == "X"
+        ? preChildElements[0].offsetHeight
+        : preChildElements[0].offsetWidth;
     const nextElement = splitElement?.parentElement?.nextSibling;
-    const nextChildElements = Object.values(nextElement.childNodes) as HTMLElement[];
-    const nextSize = orientation=='X'? nextChildElements[0].offsetHeight:nextChildElements[0].offsetWidth;
-
-
-    document.addEventListener("mousemove",onMouseMove);
+    const nextChildElements = Object.values(
+      nextElement.childNodes
+    ) as HTMLElement[];
+    const nextSize =
+      orientation == "X"
+        ? nextChildElements[0].offsetHeight
+        : nextChildElements[0].offsetWidth;
+    const panel2Element = splitElement?.childNodes[2];
+    console.log(panel2Element)
+    const panel2ChildElements = Object.values(
+      panel2Element.childNodes
+    ) as HTMLElement[];
+    const panel2Size =
+      orientation == "X"
+        ? panel2ChildElements[0].offsetHeight
+        : panel2ChildElements[0].offsetWidth;
+    setPanel2Size(panel2Size);
+    setPreSize(preSize);
+    setNextSize(nextSize);
+    document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("touchmove", onTouchMove);
     document.addEventListener("mouseup", onMouseUp);
     return () => {
@@ -96,7 +118,7 @@ export function SplitProvider({ children }: { children: React.ReactNode }) {
       document.removeEventListener("mouseup", onMouseUp);
     };
   });
-  
+
   return (
     <>
       <SplitContext.Provider value={values}>
