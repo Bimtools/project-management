@@ -2,6 +2,7 @@
 
 import MenuData, { MenuItemData } from "@/app/data/dataMenu";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import {
   AiFillLeftCircle,
@@ -20,6 +21,7 @@ const classNames = {
 
 const SideBar = () => {
   const [show, setShow] = useState(true);
+  const router = useRouter();
   return (
     <div className={show ? classNames.sideBarMaximum : classNames.sideBarMinimum}>
       <div className="flex-none">
@@ -54,6 +56,7 @@ const SideBar = () => {
               <div
                 key={x.id}
                 className="flex flex-row items-center justify-between w-full px-2 py-2 text-sm font-semibold rounded-lg hover:text-gray-900 focus:text-gray-900 hover:bg-white focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                onClick={()=>router.push(x.router)}
               >
                 <div
                   className={

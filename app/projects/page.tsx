@@ -1,7 +1,8 @@
+import Projects from "./Projects"
 
 function page() {
   return (
-    <div>user</div>
+    <Projects/>
   )
 }
 

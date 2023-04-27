@@ -14,14 +14,14 @@ const MenuData:MenuItemData[]=[
     {
         id:1,
         title:'Projects',
-        router:'Test',
+        router:'/projects',
         role:'test',
         icon:AiOutlineDollar
     },
     {
         id:2,
         title:'Clients',
-        router:'Test',
+        router:'/clients',
         role:'test',
         icon:AiOutlineSolution
 
@@ -29,14 +29,14 @@ const MenuData:MenuItemData[]=[
     {
         id:3,
         title:'Suppliers',
-        router:'Test',
+        router:'/suppliers',
         role:'test',
         icon:AiOutlineReconciliation
     },
     {
         id:4,
         title:'Users',
-        router:'Test',
+        router:'/users',
         role:'test',
         icon:AiOutlineUser
     }

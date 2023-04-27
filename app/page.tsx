@@ -1,7 +1,7 @@
-import Home from "./components/Home";
+import Projects from "./projects/Projects";
 
 const page = () => {
-  return <Home />;
+  return <Projects />;
 };
 
 export default page;
